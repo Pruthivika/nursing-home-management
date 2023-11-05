@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2023 at 06:28 PM
+-- Generation Time: Nov 05, 2023 at 04:51 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -36,6 +36,13 @@ CREATE TABLE `admission` (
   `is_paid` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `admission`
+--
+
+INSERT INTO `admission` (`admission_id`, `patient_id`, `doctor_id`, `room_id`, `admission_fee`, `is_paid`) VALUES
+(3339, 822, 5, 3, 1000, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -46,10 +53,17 @@ CREATE TABLE `appointment` (
   `appointment_id` int(11) NOT NULL,
   `patient_id` int(11) NOT NULL,
   `doctor_id` int(11) NOT NULL,
-  `appointment_date` datetime NOT NULL,
+  `appointment_date` date NOT NULL,
   `appointment_fee` decimal(10,0) NOT NULL,
   `is_paid` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `appointment`
+--
+
+INSERT INTO `appointment` (`appointment_id`, `patient_id`, `doctor_id`, `appointment_date`, `appointment_fee`, `is_paid`) VALUES
+(9, 821, 4, '2023-11-22', 2000, 0);
 
 -- --------------------------------------------------------
 
@@ -93,6 +107,14 @@ CREATE TABLE `patient` (
   `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `patient`
+--
+
+INSERT INTO `patient` (`patient_id`, `patient_name`, `patient_address`, `mobile_number`, `dob`, `gender`, `email`) VALUES
+(821, 'Nuwan Fernando', 'No 23, park road', '0774935223', '1985-06-05', 'M', 'nuwan@gmail.com'),
+(822, 'Chandhini', 'No 30, station road', '0773564223', '1984-02-05', 'F', 'chandhini@gmail.com');
+
 -- --------------------------------------------------------
 
 --
@@ -106,6 +128,14 @@ CREATE TABLE `report` (
   `file_path` varchar(255) NOT NULL,
   `report_type` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `report`
+--
+
+INSERT INTO `report` (`report_id`, `patient_id`, `doctor_id`, `file_path`, `report_type`) VALUES
+(5, 821, 4, 'www.caremate/resources/reports/report821-3-202311.pdf', 'Blood'),
+(6, 822, 5, 'www.caremate/resources/reports/report822-3-202311.pdf', 'ECG Scan');
 
 -- --------------------------------------------------------
 
@@ -125,12 +155,12 @@ CREATE TABLE `room` (
 INSERT INTO `room` (`room_id`, `is_available`) VALUES
 (1, 1),
 (2, 1),
-(3, 1),
-(4, 0),
+(3, 0),
+(4, 1),
 (5, 1),
-(6, 0),
+(6, 1),
 (7, 1),
-(8, 0),
+(8, 1),
 (9, 1),
 (10, 1);
 
@@ -145,6 +175,13 @@ CREATE TABLE `user` (
   `user_name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `user_name`, `password`) VALUES
+(1, 'test2', '$2a$12$Mz/NN3Y2A6itSEsubY1nD.T2vawf2bJNBnqWu5yyFKny8WuzedJRW');
 
 --
 -- Indexes for dumped tables
@@ -209,31 +246,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admission`
 --
 ALTER TABLE `admission`
-  MODIFY `admission_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `admission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3340;
 
 --
 -- AUTO_INCREMENT for table `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `doctor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `doctor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=823;
 
 --
 -- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
-  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `room`
@@ -245,7 +282,7 @@ ALTER TABLE `room`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

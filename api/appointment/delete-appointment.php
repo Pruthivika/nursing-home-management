@@ -8,15 +8,15 @@ if (isset($_GET['id'])) {
         $data = htmlspecialchars($data);
         return $data;
     }
-
     $id = validate($_GET['id']);
-    $sql = "DELETE FROM admission WHERE admission_id=$id;";
+
+    $sql = "DELETE FROM appointment WHERE appointment_id=$id;";
     $res = mysqli_query($conn, $sql);
     if (!$res) {
         echo "";
         die('Error: ' . mysqli_error($conn));
     } else {
-        header("Location: ../../pages/admission.php");
+        header("Location: ../../pages/appointment.php");
     }
     mysqli_close($conn);
 }
